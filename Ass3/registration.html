@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+}
+
+.container{
+    width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+label{
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+.input-group{
+    position: relative;
+    margin-top: 6px;
+}
+
+input{
+    width: 100%;
+    height: 42px;
+    padding: 10px 40px 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px #fff inset;
+}
+
+input.error{
+    border: 2px solid #dc3545;
+}
+
+input.success{
+    border: 2px solid #28a745;
+}
+
+.icon{
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    display: none;
+}
+
+.icon.error{
+    color: #dc3545;
+    display: block;
+}
+
+.icon.success{
+    color: #28a745;
+    display: block;
+}
+
+.error-text{
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+button{
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background:  #030303;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+
+    <!-- Name -->
+    <label>Name</label>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="Enter name">
+        <span class="icon" id="nameIcon">❗</span>
+    </div>
+    <div class="error-text" id="nameError"></div>
+
+    <!-- Email -->
+    <label>Email address</label>
+    <div class="input-group">
+        <input type="text" id="email" placeholder="Enter email">
+        <span class="icon" id="emailIcon">❗</span>
+    </div>
+    <div class="error-text" id="emailError"></div>
+
+    <!-- Password -->
+    <label>Password</label>
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Password">
+        <span class="icon" id="pwdIcon">❗</span>
+    </div>
+    <div class="error-text" id="pwdError"></div>
+
+    <!-- Phone -->
+    <label>Phone Number</label>
+    <div class="input-group">
+        <input type="text" id="phone" placeholder="1234512345">
+        <span class="icon" id="phoneIcon">✔</span>
+    </div>
+    <div class="error-text" id="phoneError"></div>
+
+    <button onclick="register()">Register</button>
+</div>
+
+<script>
+function register(){
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const phone = document.getElementById("phone");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const pwdError = document.getElementById("pwdError");
+    const phoneError = document.getElementById("phoneError");
+
+    const nameIcon = document.getElementById("nameIcon");
+    const emailIcon = document.getElementById("emailIcon");
+    const pwdIcon = document.getElementById("pwdIcon");
+    const phoneIcon = document.getElementById("phoneIcon");
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const pwdRegex = /^.{6,}$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    // Reset
+    [name,email,password,phone].forEach(i => i.classList.remove("error","success"));
+    [nameError,emailError,pwdError,phoneError].forEach(e => e.innerHTML = "");
+    [nameIcon,emailIcon,pwdIcon,phoneIcon].forEach(i => i.style.display="none");
+
+    let valid = true;
+
+    if(name.value.trim() === ""){
+        name.classList.add("error");
+        nameError.innerHTML = "Please enter your name.";
+        nameIcon.className = "icon error";
+        valid = false;
+    }
+
+    if(!emailRegex.test(email.value)){
+        email.classList.add("error");
+        emailError.innerHTML = "Please enter a valid email address.";
+        emailIcon.className = "icon error";
+        valid = false;
+    }
+
+    if(!pwdRegex.test(password.value)){
+        password.classList.add("error");
+        pwdError.innerHTML = "Password must be at least 6 characters long.";
+        pwdIcon.className = "icon error";
+        valid = false;
+    }
+
+    if(!phoneRegex.test(phone.value)){
+        phone.classList.add("error");
+        phoneError.innerHTML = "Enter valid 10-digit phone number.";
+        phoneIcon.className = "icon error";
+        valid = false;
+    } else {
+        phone.classList.add("success");
+        phoneIcon.className = "icon success";
+        phoneIcon.style.display = "block";
+    }
+
+    if(valid){
+        alert("Registration Successful!");
+    }
+}
+</script>
+
+</body>
+</html>

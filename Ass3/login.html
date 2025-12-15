@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f8f9fa;
+}
+
+.main{
+    width: 400px;
+    margin: 100px auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label{
+    font-weight: bold;
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+input.success{
+    border: 2px solid #28a745;
+}
+
+input.error{
+    border: 2px solid #dc3545;
+}
+
+.error-text{
+    color: #dc3545;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+button{
+    width: 100%;
+    padding: 10px;
+    background: #030303;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+    <h2>Login</h2>
+
+    <label>Email Address</label>
+    <input type="text" id="email" placeholder="abc@mail.com">
+    <div id="emailError" class="error-text"></div>
+
+    <label>Password</label>
+    <input type="password" id="pwd" placeholder="••••••">
+    <div id="pwdError" class="error-text"></div>
+
+    <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+    const emailInput = document.getElementById("email");
+    const pwdInput = document.getElementById("pwd");
+
+    const emailError = document.getElementById("emailError");
+    const pwdError = document.getElementById("pwdError");
+
+    const email = emailInput.value.trim();
+    const pwd = pwdInput.value.trim();
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    // Reset
+    emailError.innerHTML = "";
+    pwdError.innerHTML = "";
+    emailInput.classList.remove("success","error");
+    pwdInput.classList.remove("success","error");
+
+    let valid = true;
+
+    if(!emailRegex.test(email)){
+        emailError.innerHTML = "Please enter a valid email address";
+        emailInput.classList.add("error");
+        valid = false;
+    } else {
+        emailInput.classList.add("success");
+    }
+
+    if(!pwdRegex.test(pwd)){
+        pwdError.innerHTML = "Password must be at least 6 characters long.";
+        pwdInput.classList.add("error");
+        valid = false;
+    } else {
+        pwdInput.classList.add("success");
+    }
+
+    if(valid){
+        alert("Login Successful!");
+    }
+}
+</script>
+
+</body>
+</html>
