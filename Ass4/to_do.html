@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 10px auto;
+            margin: 10 px auto;
+            text-align: center;
+            background-color: rgb(242, 254, 254);
+
+        }
+        div{
+           width: 400px;
+             margin: 60px auto;
+              background: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+        }
+
+          h2{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input{
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    #btn{
+        padding: 10px 15px;
+        background-color: #030404;
+        color: white;
+        border-radius: 5px;   
+        font-size: 14px;
+    }
+    body > div > div{
+       
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+    button{
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 4px;
+       
+        font-size: 13px;
+    }
+
+    button:hover{
+        background-color: #a71d2a;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <h2>To Do App</h2>
+        <input type="text" id="name">
+        <button id="btn">ADD</button>
+    </div>
+
+    <script>
+    
+        const btn = document.getElementById("btn");
+
+        btn.addEventListener("click", function () {
+
+    
+            const todoText = document.getElementById("name").value;
+
+            const todoDiv = document.createElement("div");
+
+            const todoItem = document.createElement("span");
+            todoItem.innerText = todoText;
+
+           
+            const delBtn = document.createElement("button");
+            delBtn.innerText = "Delete";
+
+            delBtn.onclick = function () {
+                todoDiv.remove();
+            }
+            todoDiv.appendChild(todoItem);
+            todoDiv.appendChild(delBtn);
+
+            document.body.appendChild(todoDiv);
+                    });
+    </script>
+
+</body>
+</html>
